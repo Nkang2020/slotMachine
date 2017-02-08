@@ -1,0 +1,127 @@
+
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="styles.css" rel="stylesheet" type="text/css">
+  <script src="https://use.fontawesome.com/49980d77f2.js"></script>
+  <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Oswald|Lobster|Prompt">
+<script>
+$(document).ready(function(){
+  var dollars = 100;
+  var options = ["<i class='fa fa-money fa-3x'></i>","<i class='fa fa-jpy fa-3x'></i>","<i class='fa fa-gbp fa-3x'></i>"];
+  $("#money").html(dollars + "$");
+  $("#input1").keypress(function(e){
+    if(e.which==13){
+      $("#spin").click();
+    }
+  });
+  $("#spin").click(function(){
+    //slots
+    var randnum1 = Math.floor(Math.random()*3);
+    $("#rand1").html(options[randnum1]);
+    var randnum2 = Math.floor(Math.random()*3);
+    $("#rand2").html(options[randnum2]);
+    var randnum3 = Math.floor(Math.random()*3);
+    $("#rand3").html(options[randnum3]);
+    
+    if (randnum1 === 0 && randnum2 === 0 && randnum3 === 0){
+      dollars += ($("#input1").val()*3);
+      $("#money").html(dollars + "$");
+      setTimeout(function() 
+  {
+    alert("You won 3x what you bet! Jackpot!");
+  }, 500);
+    }
+    else if (randnum1 === 1 && randnum2 === 1 && randnum3 === 1){
+      dollars += ($("#input1").val()*2);
+      $("#money").html(dollars + "$");
+      setTimeout(function() 
+  {
+    alert("You won 2x two times what you bet!");
+  }, 500);
+    }
+    else if (randnum1 === 2 && randnum2 === 2 && randnum3 === 2){
+      dollars += ($("#input1").val()*2);
+      $("#money").html(dollars + "$");
+    setTimeout(function() 
+  {
+    alert("You won 2x what you bet!");
+  }, 500);
+    }
+    else if ((randnum1===0 && randnum2===0)||(randnum1===0 && randnum3===0)||(randnum2===0 && randnum3===0)){
+      dollars += ($("#input1").val()*2);
+      $("#money").html(dollars + "$");
+      setTimeout(function() 
+  {
+    alert("You won 2x what you bet!");
+  }, 500);
+    }
+ /*   else if ((randnum1===1 && randnum2===1)||(randnum1===1 && randnum3===1)||(randnum2===1 && randnum3===1)){
+      dollars += ($("#input1").val()*1.2);
+      $("#money").html(dollars + "$");
+    setTimeout(function() 
+  {
+    alert("You won 1.2x!");
+  }, 500);
+    }
+    else if ((randnum1===2 && randnum2===2)||(randnum1===2 && randnum3===2)||(randnum2===2 && randnum3===2)){
+      dollars += ($("#input1").val()*1.2);
+      $("#money").html(dollars + "$");
+    setTimeout(function() 
+  {
+    alert("You won 1.2x!");
+  }, 500);
+    } */
+    else{
+       dollars -= $("#input1").val();
+    $("#money").html(dollars + "$");
+      if(dollars === 0){
+        setTimeout(function() 
+  {
+      alert("You're out of money. Please leave.");
+  }, 500);
+      }
+     else{ 
+    setTimeout(function() 
+  {
+      alert("Better luck next time!");
+  }, 500);
+    }
+    }
+    //reset submit form
+    $("#input1").val(""); 
+  }); 
+});
+ </script>
+  </head>
+  <body>
+<div class = "text-center">
+  <div id="header">
+  <h1>Slot Machine<h1>
+    <h3>By Norman Kang</h3>
+    <p>Money: <span id="money">0</span></p>
+    </div>
+    <hr/> 
+  <div id="boxes">
+    </div>
+    <div id = "box1">
+      <p id="rand1"><i class='fa fa-money fa-3x'></i></p>
+    </div>
+    <div id = "box2">
+      <p id = "rand2"><i class='fa fa-money fa-3x'></i></p>
+    </div>
+    <div id = "box3">
+      <p id = "rand3"><i class='fa fa-money fa-3x'></i></p>
+    </div> 
+    <hr/>
+    <div id="howMuch">
+      <input id="input1" type = "number" placeholder="How much $ do you want to bet?"/>
+    </div>
+    <a class="btn btn-primary" id="spin">Spin</a> 
+</div>
+    </body>
+    </html>
+    
